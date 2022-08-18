@@ -2,8 +2,12 @@
 
 module.exports.handler = async (event) => {
   console.log('Event: ', event);
-  let responseMessage = 'Hello, World!';
+  let responseMessage = 'A Terraform Deployed Lambda Function!';
 
+  if (event.queryStringParameters && event.queryStringParameters['Name']) {
+    responseMessage = 'Hello, ' + event.queryStringParameters['Name'] + '!';
+  }
+    
   return {
     statusCode: 200,
     headers: {
